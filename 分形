@@ -1,0 +1,43 @@
+void setup() {
+  size(1000, 700);
+  smooth();
+ 
+}
+
+void draw() {
+  background(10,200,90);
+
+  pushMatrix();
+  translate(width/2, height);
+  
+  branch(map(mouseX,0,width,200,200));
+  popMatrix();
+}
+
+void branch(float len) {   
+  line(0, 0, 0, -len+10);
+  translate(0, -len+10);
+
+  len *= 0.75;
+  float theta = map(mouseY, 0, height/2, 0, PI);
+  
+  if (len > 5) {
+    pushMatrix();
+    rotate(theta);
+    branch(len);    
+    popMatrix();    
+   
+
+    pushMatrix();
+    rotate(theta+1000);
+    branch(len);
+    popMatrix();
+    
+  }
+}
+
+void keyPressed(){
+  if(key == 's' || key == 'S'){
+    saveFrame();
+  }
+}
